@@ -29,5 +29,11 @@ object Main extends ZIOAppDefault {
       s"The Elf carrying the most Calories is carrying ${calories.max} calories!"
     )
 
+    topThree = calories.sortBy(x => x).takeRight(3)
+
+    _ <- Console.printLine(
+      s"The top three Elves are carrying ${topThree.sum} calories!"
+    )
+
   } yield ()
 }
