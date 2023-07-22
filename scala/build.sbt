@@ -21,7 +21,7 @@ lazy val root = project
     )
   )
 
-lazy val day1 = project
+lazy val day01 = project
   .settings(zioSettings)
   .settings(
     libraryDependencies ++= Seq(
