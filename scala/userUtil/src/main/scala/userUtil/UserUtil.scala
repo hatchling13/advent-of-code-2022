@@ -4,9 +4,16 @@ import zio._
 import os.Path
 
 object UserUtil {
-  val newLine = sys.props("line.separator")
   val path = os.pwd / os.up / "inputs"
   val inputFileNames = ZIO.attempt(os.list(path).map(_.last))
+
+  val newLineTask = System.property("line.separator")
+
+  def getNewLine() = for {
+    newLineProp <- newLineTask
+
+    result <- ZIO.getOrFail(newLineProp)
+  } yield result
 
   def readTextFile(filename: String) = for {
     fileNames <- inputFileNames

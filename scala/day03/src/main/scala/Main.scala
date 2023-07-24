@@ -1,5 +1,5 @@
 import zio._
-import userUtil.UserUtil.{readTextFile, newLine}
+import userUtil.UserUtil.{readTextFile, getNewLine}
 
 object Main extends ZIOAppDefault {
   def appearanceSet(rucksack: String): Set[Char] = {
@@ -21,6 +21,7 @@ object Main extends ZIOAppDefault {
 
   override def run = for {
     file <- readTextFile("day03.txt")
+    newLine <- getNewLine()
 
     rucksacks = for {
       line <- file.split(newLine).toList

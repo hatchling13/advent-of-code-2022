@@ -1,6 +1,6 @@
 import zio._
 
-import userUtil.UserUtil.{readTextFile, newLine}
+import userUtil.UserUtil.{readTextFile, getNewLine}
 
 object Main extends ZIOAppDefault {
   def strategy1(opponent: Shape, player: Shape): Int = {
@@ -53,6 +53,7 @@ object Main extends ZIOAppDefault {
   }
 
   def run = for {
+    newLine <- getNewLine()
     file <- readTextFile("day02.txt")
 
     rounds = for {

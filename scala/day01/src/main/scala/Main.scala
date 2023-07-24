@@ -1,10 +1,10 @@
 import zio._
-import userUtil.UserUtil.{readTextFile, newLine}
+import userUtil.UserUtil.{readTextFile, getNewLine}
 
 object Main extends ZIOAppDefault {
 
   def run = for {
-
+    newLine <- getNewLine()
     file <- readTextFile("day01.txt")
 
     calories = for {
