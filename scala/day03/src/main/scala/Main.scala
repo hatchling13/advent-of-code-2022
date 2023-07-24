@@ -25,18 +25,51 @@ object Main extends ZIOAppDefault {
 
     rucksacks = for {
       line <- file.split(newLine).toList
-      first = line.take(line.length() / 2)
-      second = line.takeRight(line.length() / 2)
+    } yield line
+
+    compartments = for {
+      rucksack <- rucksacks
+      first = rucksack.take(rucksack.length() / 2)
+      second = rucksack.takeRight(rucksack.length() / 2)
     } yield (first, second)
 
-    priorities = for {
-      (compartment1, compartment2) <- rucksacks
+    firstPriorities = for {
+      (compartment1, compartment2) <- compartments
+
       appearance1 = appearanceSet(compartment1)
       appearance2 = appearanceSet(compartment2)
+
       intersect = appearance1 & appearance2
+
       priority = convert(intersect.head)
     } yield priority
 
-    _ <- Console.printLine(s"The sum of the priorities is ${priorities.sum}!")
+    _ <- Console.printLine(
+      s"The sum of the first priorities is ${firstPriorities.sum}!"
+    )
+
+    secondPriorities = for {
+      elfGroup <- rucksacks.grouped(3).toList
+
+      appearances = for {
+        rucksack <- elfGroup
+        appearance = appearanceSet(rucksack)
+      } yield appearance
+
+      universal = appearances.foldLeft(Set.empty[Char])((acc, elem) =>
+        acc.union(elem)
+      )
+
+      badge = appearances.foldLeft(universal)((acc, elem) =>
+        acc.intersect(elem)
+      )
+
+      priority = convert(badge.head)
+
+    } yield priority
+
+    _ <- Console.printLine(
+      s"The sum of the second priorities is ${secondPriorities.sum}!"
+    )
   } yield ()
 }
