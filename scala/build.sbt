@@ -24,6 +24,8 @@ lazy val day02 = project.settings(zioSettings) dependsOn (userUtil)
 
 lazy val day03 = project.settings(zioSettings) dependsOn (userUtil)
 
+lazy val day04 = project dependsOn (userUtil)
+
 lazy val root = project
   .in(file("."))
   .settings(
