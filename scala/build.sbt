@@ -18,13 +18,15 @@ lazy val zioSettings = Seq(
 
 lazy val userUtil = project.settings(zioSettings).settings(readFileSettings)
 
-lazy val day01 = project.settings(zioSettings) dependsOn (userUtil)
+lazy val day01 = project dependsOn (userUtil)
 
-lazy val day02 = project.settings(zioSettings) dependsOn (userUtil)
+lazy val day02 = project dependsOn (userUtil)
 
-lazy val day03 = project.settings(zioSettings) dependsOn (userUtil)
+lazy val day03 = project dependsOn (userUtil)
 
 lazy val day04 = project dependsOn (userUtil)
+
+lazy val day05 = project dependsOn (userUtil)
 
 lazy val root = project
   .in(file("."))
