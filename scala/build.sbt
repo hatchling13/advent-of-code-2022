@@ -28,6 +28,8 @@ lazy val day04 = project dependsOn (userUtil)
 
 lazy val day05 = project dependsOn (userUtil)
 
+lazy val day06 = project dependsOn (userUtil)
+
 lazy val root = project
   .in(file("."))
   .settings(
